@@ -25,10 +25,9 @@ app.get("/api/hello", function (req, res) {
 
 const getUnix = (date) => {
   const formattedDate = new Date(date);
-  const timeInMillisecond = formattedDate.getTime();
+  const unixTimestamp = formattedDate.getTime();
 
-  const unixTimestamp = Math.floor(timeInMillisecond / 1000);
-  return unixTimestamp;
+  return Number(unixTimestamp);
 };
 
 app.get("/api/", function (req, res) {
@@ -51,7 +50,7 @@ app.get("/api/:date", function (req, res) {
     res.json({ unix: newUnix, utc: newDate });
   } else if (isDateValid(new Date(parseInt(date))))
     res.json({
-      unix: parseInt(date),
+      unix: Number(date),
       utc: new Date(parseInt(date)).toUTCString(),
     });
   else res.json({ error: "Invalid Date" });
