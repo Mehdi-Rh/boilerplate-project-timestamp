@@ -36,7 +36,7 @@ app.get("/api/", function (req, res) {
 
   const newUnix = getUnix(date);
   const newDate = new Date(date).toUTCString();
-  res.json({ unix: newUnix, date: newDate });
+  res.json({ unix: newUnix, utc: newDate });
 });
 
 function isDateValid(dateStr) {
@@ -48,11 +48,11 @@ app.get("/api/:date", function (req, res) {
   if (isDateValid(date)) {
     const newUnix = getUnix(date);
     const newDate = new Date(date).toUTCString();
-    res.json({ unix: newUnix, date: newDate });
+    res.json({ unix: newUnix, utc: newDate });
   } else if (isDateValid(new Date(parseInt(date))))
     res.json({
       unix: parseInt(date),
-      date: new Date(parseInt(date)).toUTCString(),
+      utc: new Date(parseInt(date)).toUTCString(),
     });
   else res.json({ error: "Invalid Date" });
 });
